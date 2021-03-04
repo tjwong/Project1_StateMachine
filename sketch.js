@@ -2,8 +2,12 @@
 	Project 1
 	by Tyler Wong
 
+	This is a project inspired by the Avatar the Last Airbender series that utilizes
+	assets created by me for an immersive game that navigates players through the different elements
+	until they are able to master all of them. 
 ------------------------------------------------------------------------------------
-	
+	This uses a simple state machine as well as clickable objects to be an interactive game. 
+	The clickable objects are delcared and boolean variables are used to keep track of them. 
 
 ***********************************************************************************/
 
@@ -46,6 +50,7 @@ function preload() {
   images[7] = loadImage('assets/earth_element.png');
   images[8] = loadImage('assets/air_element.png');
   images[9] = loadImage('assets/fire_element.png');
+  images[10] = loadImage('assets/combined_elements.png');
 
   // images[6] = loadImage('assets/splash.png');
 
@@ -142,11 +147,21 @@ drawState1 = function() {
 // A function that shows all the elements once they are all learned and give more instruction
 function drawLearnedElements () {
 	text("Combine all four elements to become the master!", midWidth, height - (gTextOffset + 25));
-	text("Press W, E, A, and F at the same time to combine them!");
+	text("Press M to master all the elements at the same time to combine them!", midWidth, height - gTextOffset);
 	image(images[6], midWidth/2 - waterButton.width/2 , midHeight/2 - waterButton.height/2 );
 	image(images[7], midWidth + (midWidth/2) - earthButton.width/2 , (midHeight/2) - earthButton.height/2 );
 	image(images[8], (midWidth/2) - airButton.width/2 , midHeight + (midHeight/2) - airButton.height/2 );
 	image(images[9], midWidth + (midWidth/2) - fireButton.width/2 , midHeight + (midHeight/2) - fireButton.height/2 );
+}
+
+//Draws the final mastered elements state
+drawMasterState = function() {
+	image(images[0],midWidth - images[0].width/2, midHeight - images[0].height/2);
+   	image(images[1],(midWidth/1.5)- images[1].width/2, (midHeight+20) - images[1].width/2);
+
+   	image(images[10], midWidth - images[10].width/2, midHeight - images[10].height/2);
+   	textSize(50);
+   	text("You've mastered all the elements!", midWidth, height - 50);
 }
 
 // Draws the water learning state along with the instructions
@@ -279,8 +294,8 @@ function keyTyped() {
   	}
   }
   if( drawFunction === drawState1 ) {
-  	if( key === 'w' && key === 'e' && key === 'a' && key === 'f') {
-  		drawFunction = 
+  	if( key === 'm') {
+  		drawFunction = drawMasterState;
   	}
   }
   else if( drawFunction === drawWaterState ) {
